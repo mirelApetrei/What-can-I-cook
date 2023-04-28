@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.HomeFragment">
+    xmlns:meow="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        tools:context=".ui.HomeFragment"
+        tools:ignore="MissingClass">
 
-</FrameLayout>
+        <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+            android:id="@+id/bottom_nav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            meow:count="4"
+            meow:defaultIconColor="@color/default_icon_color"
+            meow:layout_constraintBottom_toBottomOf="parent"
+            meow:layout_constraintLeft_toLeftOf="parent"
+            meow:layout_constraintRight_toRightOf="parent"
+            meow:layout_constraintTop_toBottomOf="parent"
+            meow:shadowColor="@color/shadow_color"
+            meow:shadowEnabled="true"
+            meow:shadowHeight="10dp"
+            meow:tabGravity="center"
+            meow:tabMode="fixed"
+            meow:backgroundColor="@color/background_color"
+            meow:menu="@{viewModel.bottomNavMenu}"
+            meow:onShowListener="@{(item) -> viewModel.onNavigationItemSelected(item)}" />
+
+    </LinearLayout>
+</layout>
