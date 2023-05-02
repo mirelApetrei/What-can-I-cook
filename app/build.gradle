@@ -64,6 +64,6 @@ dependencies {
     implementation "androidx.room:room-ktx:2.5.1"
 
 //    Navigation-bar MEOW
-    implementation 'com.etebarian:meow-bottom-navigation:1.4.8'
+    implementation 'com.etebarian:meow-bottom-navigation:1.2.0'
 
 }
