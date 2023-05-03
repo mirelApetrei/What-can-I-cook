@@ -10,11 +10,10 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="170dp"
         android:layout_height="270dp"
-        android:layout_margin="4dp"
-        app:cardCornerRadius="10dp"
-
+        android:layout_margin="8dp"
+        app:cardCornerRadius="20dp"
         app:cardPreventCornerOverlap="true"
-        app:cardMaxElevation="5dp"
+        app:cardMaxElevation="8dp"
         app:strokeWidth="1dp"
         app:strokeColor="@color/black">
 
