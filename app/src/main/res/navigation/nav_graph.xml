@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.whatcanicook.ui.HomeFragment"
+        android:name="com.example.whatcanicook.ui.recipes.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.example.whatcanicook.ui.FavoritesFragment"
+        android:name="com.example.whatcanicook.ui.favorites.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/shoppingListsFragment"
-        android:name="com.example.whatcanicook.ui.ShoppingListsFragment"
+        android:name="com.example.whatcanicook.ui.shopping.ShoppingListsFragment"
         android:label="fragment_shopping_lists"
         tools:layout="@layout/fragment_shopping_lists" >
         <action

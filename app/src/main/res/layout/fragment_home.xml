@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.HomeFragment">
+        tools:context=".ui.recipes.HomeFragment">
 
 
 
@@ -41,8 +41,8 @@
             android:layout_below="@+id/materialToolbar"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="6dp"
-            android:padding="8dp"
             android:clipToPadding="false"
+            android:padding="8dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             tools:itemCount="40"

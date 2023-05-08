@@ -1,14 +1,11 @@
 package com.example.whatcanicook.data
 
-import androidx.lifecycle.LiveData
-import com.etebarian.meowbottomnavigation.BuildConfig
 import com.example.whatcanicook.data.datamodels.Recipe
-import com.example.whatcanicook.data.datamodels.RecipeDetailResponse
 import com.example.whatcanicook.data.local.RecipeDao
-import com.example.whatcanicook.remote.SpoonacularApiService
+import com.example.whatcanicook.network.FoodRecipesApi
 import com.example.whatcanicook.utils.Resource
 
-class RecipeRepository(private val recipeDao: RecipeDao, private val apiService: SpoonacularApiService) {
+class RecipeRepository(private val recipeDao: RecipeDao, private val apiService: FoodRecipesApi) {
 
     suspend fun searchRecipes(query: String, number: Int, cuisine: String?, diet: String?): Resource<List<Recipe>> {
         return try {
@@ -26,8 +23,8 @@ class RecipeRepository(private val recipeDao: RecipeDao, private val apiService:
 
     suspend fun fetchRecipeDetails(recipeId: Int): Resource<RecipeDetailResponse> {
         return try {
-            val response = apiService.getRecipeDetails(recipeId)
-            if (response.isSuccessful) {
+            val response!! = apiService.getRecipeDetails(recipeId)
+            if (response!!.isSuccessful) {
                 val recipeDetails = response.body()
                 recipeDetails?.let {
                     recipeDao.insertRecipeDetails(it.toRecipeDetailsEntity())
