@@ -1,12 +1,7 @@
 package com.example.whatcanicook.data
 
-import androidx.lifecycle.LiveData
-import com.etebarian.meowbottomnavigation.BuildConfig
-import com.example.whatcanicook.data.datamodels.Recipe
-import com.example.whatcanicook.data.datamodels.RecipeDetailResponse
 import com.example.whatcanicook.data.local.RecipeDao
 import com.example.whatcanicook.remote.SpoonacularApiService
-import com.example.whatcanicook.utils.Resource
 
 class RecipeRepository(private val recipeDao: RecipeDao, private val apiService: SpoonacularApiService) {
 

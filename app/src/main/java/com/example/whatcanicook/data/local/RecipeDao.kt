@@ -5,7 +5,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.whatcanicook.data.datamodels.Recipe
 
 // can ich mit eine DAO BEIDE Entities zugreifen
 
