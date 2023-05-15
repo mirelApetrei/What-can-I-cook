@@ -1,16 +1,11 @@
-package com.example.whatcanicook.ui
+package com.example.whatcanicook.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.whatcanicook.data.RecipeRepository
 import com.example.whatcanicook.data.local.getDatabase
 import com.example.whatcanicook.remote.RecipeApi
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.http.Query
-import retrofit2.http.QueryMap
 
 const val TAG = "MainViewModel"
 

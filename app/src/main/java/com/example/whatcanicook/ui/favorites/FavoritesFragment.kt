@@ -1,4 +1,4 @@
-package com.example.whatcanicook.ui
+package com.example.whatcanicook.ui.favorites
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.whatcanicook.R
-/*in this fragment we have all the receipes that we saved*/
 
-class ShoppingListsFragment : Fragment() {
+class FavoritesFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -23,7 +22,8 @@ class ShoppingListsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shopping_lists, container, false)
+        return inflater.inflate(R.layout.fragment_favorites, container, false)
     }
+
 
 }
