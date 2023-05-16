@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding.recyclerview.ada pter = mAdapter
+        binding.recyclerview.ada pter = mAdapter//
         binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
         showShimmerEffect()
     }
