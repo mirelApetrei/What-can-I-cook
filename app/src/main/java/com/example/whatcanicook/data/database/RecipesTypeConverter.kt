@@ -1,7 +1,9 @@
-package com.example.foody.data.database
+package com.example.whatcanicook.data.database
 
 import androidx.room.TypeConverter
-import com.example.foody.models.FoodRecipe
+import com.example.whatcanicook.models.FoodRecipe
+
+
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

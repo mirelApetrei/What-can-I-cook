@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="result"
+            type="com.example.whatcanicook.models.Result" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,6 +16,7 @@
         android:layout_margin="4dp">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/row_cardView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:shadowColor="@color/design_default_color_error"

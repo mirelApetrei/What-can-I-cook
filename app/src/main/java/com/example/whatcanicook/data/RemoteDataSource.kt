@@ -1,7 +1,8 @@
-package com.example.foody.data
+package com.example.whatcanicook.data
 
-import com.example.foody.data.network.FoodRecipesApi
-import com.example.foody.models.FoodRecipe
+
+import com.example.whatcanicook.data.network.FoodRecipesApi
+import com.example.whatcanicook.models.FoodRecipe
 import retrofit2.Response
 import javax.inject.Inject
 
