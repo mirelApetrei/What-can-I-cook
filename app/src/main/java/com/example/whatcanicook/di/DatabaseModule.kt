@@ -1,18 +1,20 @@
 package com.example.whatcanicook.di
 
+
 import android.content.Context
 import androidx.room.Room.databaseBuilder
 import com.example.whatcanicook.data.database.RecipesDatabase
 import com.example.whatcanicook.utils.Constants.Companion.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
+
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
     @Singleton

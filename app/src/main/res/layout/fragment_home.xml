@@ -5,14 +5,16 @@
     tools:ignore="NamespaceTypo">
 
     <data>
-
+        <variable
+            name="mainViewModel"
+            type="com.example.whatcanicook.viewmodels.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.home.HomeFragment">
+        tools:context=".ui.fragments.home.HomeFragment">
 
 
         <com.todkars.shimmer.ShimmerRecyclerView
@@ -42,12 +44,15 @@
             android:src="@drawable/ic_restaurant"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:focusable="true" />
+            android:focusable="true"
+            android:contentDescription="TODO" />
 
         <ImageView
             android:id="@+id/error_imageView"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            readApiResponse="@{mainViewModel.recipesResponse}"
+            readDatabase="@{mainViewModel.readRecipes}"
             android:alpha="0.5"
             android:src="@drawable/ic_sad"
             android:visibility="invisible"
@@ -61,9 +66,10 @@
             android:id="@+id/error_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            readApiResponse2="@{mainViewModel.recipesResponse}"
+            readDatabase2="@{mainViewModel.readRecipes}"
             android:layout_marginTop="8dp"
             android:alpha="0.5"
-            android:text="No Internet Connection."
             android:textSize="18sp"
             android:textStyle="bold"
             android:visibility="invisible"

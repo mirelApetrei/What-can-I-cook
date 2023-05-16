@@ -1,20 +1,21 @@
 package com.example.whatcanicook.di
 
 
+import android.app.Application
 import com.example.whatcanicook.utils.Constants.Companion.BASE_URL
 import com.example.whatcanicook.data.network.FoodRecipesApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+@InstallIn(SingletonComponent::class) // <-- I use SingletonComponent as parameter instead of ApplicationComponent, because  after Dagger version 2.30
 @Module
-@InstallIn( ApplicationComponent::class)
 object NetworkModule {
 
     @Singleton
