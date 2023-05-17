@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private  var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var mainViewModel: MainViewModel
@@ -50,7 +50,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding.recyclerview.ada pter = mAdapter
+
+        binding.recyclerview.adapter = mAdapter
         binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
         showShimmerEffect()
     }
