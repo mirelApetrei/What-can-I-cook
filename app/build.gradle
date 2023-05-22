@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'org.jetbrains.kotlin.android'
-    id 'com.google.devtools.ksp'
+//    id 'com.google.devtools.ksp'
     id 'com.google.dagger.hilt.android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
@@ -70,7 +70,7 @@ dependencies {
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
 
     // Material Components
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
 
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
@@ -132,6 +132,8 @@ dependencies {
 
     // Shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'com.todkars:shimmer-recyclerview:0.4.0'
+
 
     // Jsoup
     implementation 'org.jsoup:jsoup:1.16.1'

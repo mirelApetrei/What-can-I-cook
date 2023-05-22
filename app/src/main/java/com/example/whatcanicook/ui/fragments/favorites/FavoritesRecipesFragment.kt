@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.whatcanicook.R
 
-class FavoritesFragment : Fragment() {
+class FavoritesRecipesFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

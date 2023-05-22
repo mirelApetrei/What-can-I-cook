@@ -8,16 +8,28 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.whatcanicook.ui.fragments.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="Home Page"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_recipesBottomSheet"
+            app:destination="@id/recipesBottomSheet" />
+        <argument
+            android:name="backFromBottomSheet"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
     <fragment
-        android:id="@+id/favoritesFragment"
-        android:name="com.example.whatcanicook.ui.fragments.favorites.FavoritesFragment"
-        android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" />
-    <fragment
-        android:id="@+id/recipeDetailFragment"
-        android:name="com.example.whatcanicook.ui.RecipeDetailFragment"
-        android:label="fragment_recipe_detail"
-        tools:layout="@layout/fragment_recipe_detail" />
+        android:id="@+id/favoriteRecipesFragment"
+        android:name="com.example.whatcanicook.ui.fragments.favorites.FavoritesRecipesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorite_recipes" />
+    <dialog
+        android:id="@+id/recipesBottomSheet"
+        android:name="com.example.whatcanicook.ui.fragments.home.bottomsheet.RecipesBottomSheet"
+        android:label="recipes_bottom_sheet"
+        tools:layout="@layout/recipes_bottom_sheet" >
+        <action
+            android:id="@+id/action_recipesBottomSheet_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </dialog>
 </navigation>

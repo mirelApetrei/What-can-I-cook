@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WhatCanICook"
-        tools:targetApi="donut">
+        >
         <activity
             android:name=".ui.fragments.MainActivity"
             android:exported="true">
