@@ -23,9 +23,10 @@ class MainViewModel @ViewModelInject constructor(
 
     /** ROOM DATABASE */
 
-    val readRecipes: LiveData<List<RecipesEntity>> = repository.local.readDatabase().asLiveData()
+    val readRecipes: LiveData<List<RecipesEntity>> = repository.local.readDatabase().asLiveData() //<-- the last function is there because we are using Flow, and now we are using lso LiveData
 
-    private fun insertRecipes(recipesEntity: RecipesEntity) =
+
+    private fun insertRecipes(recipesEntity: RecipesEntity) =       //    this insert the recipes in our database
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.insertRecipes(recipesEntity)
         }

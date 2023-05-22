@@ -9,7 +9,7 @@ import com.google.gson.reflect.TypeToken
 
 class RecipesTypeConverter {
 
-    var gson = Gson()
+    var gson = Gson() //<-- because we want to serialize
 
     @TypeConverter
     fun foodRecipeToString(foodRecipe: FoodRecipe): String {
@@ -23,3 +23,4 @@ class RecipesTypeConverter {
     }
 
 }
+/*we convert the Json object to a string, and vice-versa, to store in our database*/

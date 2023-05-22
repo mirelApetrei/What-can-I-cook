@@ -10,13 +10,16 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.whatcanicook.R
 import com.example.whatcanicook.adapters.RecipesAdapter
 import com.example.whatcanicook.databinding.FragmentHomeBinding
+import com.example.whatcanicook.ui.fragments.ShimmerRecyclerView
 import com.example.whatcanicook.utils.NetworkResult
 import com.example.whatcanicook.utils.observeOnce
 import com.example.whatcanicook.viewmodels.MainViewModel
 import com.example.whatcanicook.viewmodels.RecipesViewModel
 import kotlinx.coroutines.launch
+import com.todkars.shimmer.ShimmerRecyclerView
 
 
 class HomeFragment : Fragment() {
@@ -32,6 +35,7 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         recipesViewModel = ViewModelProvider(requireActivity())[RecipesViewModel::class.java]
+
     }
 
     override fun onCreateView(
@@ -50,7 +54,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-
         binding.recyclerview.adapter = mAdapter
         binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
         showShimmerEffect()
@@ -60,7 +63,7 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
                 if (database.isNotEmpty()) {
-                    Log.d("RecipesFragment", "readDatabase called!")
+                    Log.d("HomeFragment", "readDatabase called!")
                     mAdapter.setData(database[0].foodRecipe)
                     hideShimmerEffect()
                 } else {
@@ -71,7 +74,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun requestApiData() {
-        Log.d("RecipesFragment", "requestApiData called!")
+        Log.d("HomeFragment", "requestApiData called!")
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
         mainViewModel.recipesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
