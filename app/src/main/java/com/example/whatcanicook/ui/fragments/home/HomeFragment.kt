@@ -10,16 +10,14 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.whatcanicook.R
 import com.example.whatcanicook.adapters.RecipesAdapter
 import com.example.whatcanicook.databinding.FragmentHomeBinding
-import com.example.whatcanicook.ui.fragments.ShimmerRecyclerView
 import com.example.whatcanicook.utils.NetworkResult
 import com.example.whatcanicook.utils.observeOnce
 import com.example.whatcanicook.viewmodels.MainViewModel
 import com.example.whatcanicook.viewmodels.RecipesViewModel
 import kotlinx.coroutines.launch
-import com.todkars.shimmer.ShimmerRecyclerView
+
 
 
 class HomeFragment : Fragment() {

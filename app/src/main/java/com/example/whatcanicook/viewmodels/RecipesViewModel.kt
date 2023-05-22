@@ -19,8 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RecipesViewModel @ViewModelInject constructor(
-    application: Application,
-    private val dataStoreRepository: DataStoreRepository
+    application: Application, private val dataStoreRepository: DataStoreRepository
 ) : AndroidViewModel(application) {
 
     private var mealType = DEFAULT_MEAL_TYPE
