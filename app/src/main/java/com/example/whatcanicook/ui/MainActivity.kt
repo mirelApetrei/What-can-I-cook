@@ -1,4 +1,4 @@
-package com.example.whatcanicook.ui.fragments
+package com.example.whatcanicook.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

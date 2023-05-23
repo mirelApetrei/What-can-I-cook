@@ -17,12 +17,22 @@
             android:name="backFromBottomSheet"
             app:argType="boolean"
             android:defaultValue="false" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailsActivity"
+            app:destination="@id/detailsActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteRecipesFragment"
+            app:destination="@id/favoriteRecipesFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteRecipesFragment"
         android:name="com.example.whatcanicook.ui.fragments.favorites.FavoritesRecipesFragment"
         android:label="Favorites"
-        tools:layout="@layout/fragment_favorite_recipes" />
+        tools:layout="@layout/fragment_favorite_recipes" >
+        <action
+            android:id="@+id/action_favoriteRecipesFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <dialog
         android:id="@+id/recipesBottomSheet"
         android:name="com.example.whatcanicook.ui.fragments.home.bottomsheet.RecipesBottomSheet"
@@ -32,4 +42,13 @@
             android:id="@+id/action_recipesBottomSheet_to_homeFragment"
             app:destination="@id/homeFragment" />
     </dialog>
+    <activity
+        android:id="@+id/detailsActivity"
+        android:name="com.example.whatcanicook.ui.DetailsActivity"
+        android:label="Details"
+        tools:layout="@layout/activity_details">
+        <argument
+            android:name="result"
+            app:argType="com.example.whatcanicook.models.Result" />
+    </activity>
 </navigation>

@@ -21,6 +21,7 @@ import com.example.whatcanicook.adapters.RecipesAdapter
 import com.example.whatcanicook.databinding.FragmentHomeBinding
 import com.example.whatcanicook.utils.NetworkListener
 import com.example.whatcanicook.utils.NetworkResult
+import com.example.whatcanicook.utils.NetworkResult.*
 import com.example.whatcanicook.utils.observeOnce
 import com.example.whatcanicook.viewmodels.MainViewModel
 import com.example.whatcanicook.viewmodels.RecipesViewModel
@@ -108,6 +109,9 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
+        if(query != null) {
+            searchApiData(query)
+        }
         return true
     }
 
@@ -134,12 +138,12 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
         mainViewModel.recipesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
-                is NetworkResult.Success -> {
+                is Success -> {
                     hideShimmerEffect()
                     response.data?.let { mAdapter.setData(it) }
                 }
 
-                is NetworkResult.Error -> {
+                is Error -> {
                     hideShimmerEffect()
                     loadDataFromCache()
                     Toast.makeText(
@@ -149,7 +153,35 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                     ).show()
                 }
 
-                is NetworkResult.Loading -> {
+                is Loading -> {
+                    showShimmerEffect()
+                }
+            }
+        }
+    }
+
+    private fun searchApiData(searchQuery: String) {
+        showShimmerEffect()
+        mainViewModel.searchRecipes(recipesViewModel.applySearchQuery(searchQuery))
+        mainViewModel.searchedRecipesResponse.observe(this.viewLifecycleOwner { searchedResponse ->
+            when (searchedResponse) {
+                is Success -> {
+                    hideShimmerEffect()
+                    val foodRecipe = searchedResponse.data
+                    foodRecipe?.let { mAdapter.setData(it) }
+                }
+
+                is Error -> {
+                    hideShimmerEffect()
+                    loadDataFromCache()
+                    Toast.makeText(
+                        requireContext(),
+                        searchedResponse.message.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                is Loading -> {
                     showShimmerEffect()
                 }
             }
