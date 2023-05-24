@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.example.whatcanicook.data.database.RecipesEntity
+import com.example.whatcanicook.data.database.entities.RecipesEntity
 import com.example.whatcanicook.models.FoodRecipe
 import com.example.whatcanicook.utils.NetworkResult
 

@@ -1,4 +1,4 @@
-package com.example.whatcanicook.data.database
+package com.example.whatcanicook.data.database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

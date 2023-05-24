@@ -6,8 +6,9 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.example.whatcanicook.data.database.RecipesEntity
+import com.example.whatcanicook.data.database.entities.RecipesEntity
 import com.example.whatcanicook.data.Repository
+import com.example.whatcanicook.data.database.entities.FavoritesEntity
 import com.example.whatcanicook.models.FoodRecipe
 import com.example.whatcanicook.utils.NetworkResult
 import kotlinx.coroutines.Dispatchers
@@ -22,16 +23,34 @@ class MainViewModel @ViewModelInject constructor(
 
 
     /** ROOM DATABASE */
+    /********************************************************************************************/
 
-    val readRecipes: LiveData<List<RecipesEntity>> = repository.local.readDatabase().asLiveData() //<-- the last function is there because we are using Flow, and now we are using lso LiveData
-
+    val readRecipes: LiveData<List<RecipesEntity>> = repository.local.readRecipes().asLiveData() //<-- the last function is there because we are using Flow, and now we are using lso LiveData
+    val readFavoriteRecipes: LiveData<List<FavoritesEntity>> = repository.local.readFavoriteRecipes().asLiveData()
 
     private fun insertRecipes(recipesEntity: RecipesEntity) =       //    this insert the recipes in our database
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.insertRecipes(recipesEntity)
         }
 
+    fun insertFavoriteRecipe(favoritesEntity: FavoritesEntity) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.insertFavoriteRecipes(favoritesEntity)
+        }
+
+    fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntity) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.deleteFavoriteRecipe(favoritesEntity)
+        }
+
+    private fun deleteAllFavoriteRecipes() =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.deleteAllFavoriteRecipes()
+        }
+
     /** RETROFIT */
+    /********************************************************************************************/
+
     var recipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
     var searchedRecipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
 
@@ -42,6 +61,8 @@ class MainViewModel @ViewModelInject constructor(
     fun searchRecipes(searchQuery: Map<String, String>) = viewModelScope.launch {
         searchRecipesSafeCall(searchQuery)
     }
+
+    /********************************************************************************************/
 
     private suspend fun getRecipesSafeCall(queries: Map<String, String>) {
         recipesResponse.value = NetworkResult.Loading()
