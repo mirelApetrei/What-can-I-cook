@@ -20,9 +20,6 @@
         <action
             android:id="@+id/action_homeFragment_to_detailsActivity"
             app:destination="@id/detailsActivity" />
-        <action
-            android:id="@+id/action_homeFragment_to_favoriteRecipesFragment"
-            app:destination="@id/favoriteRecipesFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteRecipesFragment"
@@ -30,8 +27,8 @@
         android:label="Favorites"
         tools:layout="@layout/fragment_favorite_recipes" >
         <action
-            android:id="@+id/action_favoriteRecipesFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_favoriteRecipesFragment_to_detailsActivity"
+            app:destination="@id/detailsActivity" />
     </fragment>
     <dialog
         android:id="@+id/recipesBottomSheet"
