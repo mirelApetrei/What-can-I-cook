@@ -14,8 +14,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class) // <-- I use SingletonComponent as parameter instead of ApplicationComponent, because  after Dagger version 2.30
 @Module
+@InstallIn(SingletonComponent::class) // <-- I use SingletonComponent as parameter instead of ApplicationComponent, because  after Dagger version 2.30
 object NetworkModule {
 
     @Singleton

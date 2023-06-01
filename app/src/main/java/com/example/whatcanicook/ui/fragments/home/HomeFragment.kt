@@ -6,13 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,6 +49,12 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var networkListener: NetworkListener
 
+    override fun onResume() {
+        super.onResume()
+        if (mainViewModel.recyclerViewState != null) {
+            binding.recyclerview.layoutManager?.onRestoreInstanceState(mainViewModel.recyclerViewState)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,13 +66,27 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
 
-        setHasOptionsMenu(true)
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.recipes_menu, menu)
+
+                val search = menu.findItem(R.id.menu_search)
+                val searchView = search.actionView as? SearchView
+                searchView?.isSubmitButtonEnabled = true
+                searchView?.setOnQueryTextListener(this@HomeFragment)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return true
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         setupRecyclerView()
 
@@ -71,14 +95,16 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         }
 
         lifecycleScope.launch {
-            networkListener = NetworkListener()
-            networkListener.checkNetworkAvailability(requireContext())
-                .collect { status ->
-                    Log.d("NetworkListener", status.toString())
-                    recipesViewModel.networkStatus = status
-                    recipesViewModel.showNetworkStatus()
-                    readDatabase()
-                }
+            repeatOnLifecycle(state = Lifecycle.State.STARTED) {
+                networkListener = NetworkListener()
+                networkListener.checkNetworkAvailability(requireContext())
+                    .collect { status ->
+                        Log.d("NetworkListener", status.toString())
+                        recipesViewModel.networkStatus = status
+                        recipesViewModel.showNetworkStatus()
+                        readDatabase()
+                    }
+            }
         }
 
         binding.recipesFab.setOnClickListener {
@@ -88,24 +114,15 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                 recipesViewModel.showNetworkStatus()
             }
         }
+
         return binding.root
     }
 
-    /*I don't know yet why  it doesn't recognize me this shimmer recyclerview...but I'l find out eventually*/
+//  you have to be very careful with this shimmer recyclerView...if you don't complete all xml attributes, will not be recognized
     private fun setupRecyclerView() {
         binding.recyclerview.adapter = mAdapter
         binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
         showShimmerEffect()
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.recipes_menu, menu)
-
-        val search = menu.findItem(R.id.menu_search)
-        val searchView = search.actionView as? SearchView
-        searchView?.isSubmitButtonEnabled = true
-        searchView?.setOnQueryTextListener(this)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -132,18 +149,17 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
             }
         }
     }
-
     private fun requestApiData() {
-        Log.d("HomeFragment", "requestApiData called!")
+        Log.d("RecipesFragment", "requestApiData called!")
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
         mainViewModel.recipesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
-                is Success -> {
+                is NetworkResult.Success -> {
                     hideShimmerEffect()
                     response.data?.let { mAdapter.setData(it) }
+                    recipesViewModel.saveMealAndDietType()
                 }
-
-                is Error -> {
+                is NetworkResult.Error -> {
                     hideShimmerEffect()
                     loadDataFromCache()
                     Toast.makeText(
@@ -152,8 +168,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-
-                is Loading -> {
+                is NetworkResult.Loading -> {
                     showShimmerEffect()
                 }
             }
@@ -163,25 +178,23 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun searchApiData(searchQuery: String) {
         showShimmerEffect()
         mainViewModel.searchRecipes(recipesViewModel.applySearchQuery(searchQuery))
-        mainViewModel.searchedRecipesResponse.observe(this.viewLifecycleOwner { searchedResponse ->
-            when (searchedResponse) {
-                is Success -> {
+        mainViewModel.searchedRecipesResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is NetworkResult.Success -> {
                     hideShimmerEffect()
-                    val foodRecipe = searchedResponse.data
+                    val foodRecipe = response.data
                     foodRecipe?.let { mAdapter.setData(it) }
                 }
-
-                is Error -> {
+                is NetworkResult.Error -> {
                     hideShimmerEffect()
                     loadDataFromCache()
                     Toast.makeText(
                         requireContext(),
-                        searchedResponse.message.toString(),
+                        response.message.toString(),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-
-                is Loading -> {
+                is NetworkResult.Loading -> {
                     showShimmerEffect()
                 }
             }
@@ -189,25 +202,29 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun loadDataFromCache() {
-        lifecycleScope.launch {
-            mainViewModel.readRecipes.observe(viewLifecycleOwner) { database ->
-                if (database.isNotEmpty()) {
-                    mAdapter.setData(database[0].foodRecipe)
-                }
+        mainViewModel.readRecipes.observe(viewLifecycleOwner) { database ->
+            if (database.isNotEmpty()) {
+                mAdapter.setData(database.first().foodRecipe)
             }
         }
     }
 
     private fun showShimmerEffect() {
-        binding.recyclerview.showShimmer()
+        binding.shimmerFrameLayout.startShimmer()
+        binding.shimmerFrameLayout.visibility = View.VISIBLE
+        binding.recyclerview.visibility = View.GONE
     }
 
     private fun hideShimmerEffect() {
-        binding.recyclerview.hideShimmer()
+        binding.shimmerFrameLayout.stopShimmer()
+        binding.shimmerFrameLayout.visibility = View.GONE
+        binding.recyclerview.visibility = View.VISIBLE
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mainViewModel.recyclerViewState =
+            binding.recyclerview.layoutManager?.onSaveInstanceState()
         _binding = null
     }
 }

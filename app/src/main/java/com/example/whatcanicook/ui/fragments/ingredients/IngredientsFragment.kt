@@ -6,35 +6,45 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.whatcanicook.R
+
 import com.example.whatcanicook.adapters.IngredientsAdapter
+import com.example.whatcanicook.databinding.FragmentIngredientsBinding
 import com.example.whatcanicook.models.Result
 import com.example.whatcanicook.utils.Constants.Companion.RECIPE_RESULT_KEY
+import com.example.whatcanicook.utils.retrieveParcelable
 
 class IngredientsFragment : Fragment() {
 
     private val mAdapter: IngredientsAdapter by lazy { IngredientsAdapter() }
 
+    private var _binding: FragmentIngredientsBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_ingredients, container, false)
+        _binding = FragmentIngredientsBinding.inflate(inflater, container, false)
 
         val args = arguments
-        val myBundle: Result? = args?.getParcelable(RECIPE_RESULT_KEY)
+        val myBundle: Result? = args?.retrieveParcelable(RECIPE_RESULT_KEY)
 
-        setupRecyclerView(view)
+        setupRecyclerView()
         myBundle?.extendedIngredients?.let { mAdapter.setData(it) }
 
-        return view
+        return binding.root
     }
 
-    private fun setupRecyclerView(view: View) {
-        view.ingredients_recyclerview.adapter = mAdapter
-        view.ingredients_recyclerview.layoutManager = LinearLayoutManager(requireContext())
+    private fun setupRecyclerView() {
+        binding.ingredientsRecyclerview.adapter = mAdapter
+        binding.ingredientsRecyclerview.layoutManager = LinearLayoutManager(requireContext())
     }
 
+    /*We are using this method because we want to avoid memory leaks*/
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
 

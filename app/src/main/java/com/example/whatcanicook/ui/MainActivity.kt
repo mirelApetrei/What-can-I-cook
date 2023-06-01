@@ -8,26 +8,29 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.whatcanicook.R
+import com.example.whatcanicook.databinding.ActivityDetailsBinding
+import com.example.whatcanicook.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setTheme(R.style.AppTheme)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.homeFragment,
-                R.id.favoritesFragment,
-                R.id.recipeDetailFragment
+                R.id.favoriteRecipesFragment,
+                R.id.shop_list_fragment
             )
         )
-        var bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
-        bottomNavigationView.setupWithNavController(navController)
+        binding.bottomNavigationView.setupWithNavController(navController)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
     }

@@ -7,27 +7,40 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import com.example.whatcanicook.R
+import com.example.whatcanicook.databinding.FragmentHomeBinding
+import com.example.whatcanicook.databinding.FragmentInstructionsBinding
 import com.example.whatcanicook.models.Result
 import com.example.whatcanicook.utils.Constants
+import com.example.whatcanicook.utils.Constants.Companion.RECIPE_RESULT_KEY
+import com.example.whatcanicook.utils.retrieveParcelable
 
 
 class InstructionsFragment : Fragment() {
 
+    private var _binding: FragmentInstructionsBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_instructions, container, false)
+        _binding = FragmentInstructionsBinding.inflate(inflater, container, false)
 
         val args = arguments
-        val myBundle: Result? = args?.getParcelable(Constants.RECIPE_RESULT_KEY)
+        val myBundle: Result? = args?.retrieveParcelable(RECIPE_RESULT_KEY)
 
-        view.instructions_webView.webViewClient = object : WebViewClient() {}
-        val websiteUrl: String = myBundle!!.sourceUrl
-        view.instructions_webView.loadUrl(websiteUrl)
+        if (myBundle != null) {
+            binding.instructionsWebView.webViewClient = object : WebViewClient() {}
+            val websiteUrl: String = myBundle.sourceUrl
+            binding.instructionsWebView.loadUrl(websiteUrl)
+        }
+        return binding.root
+    }
 
-        return view
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
 

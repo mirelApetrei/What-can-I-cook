@@ -12,17 +12,21 @@ import androidx.navigation.navArgs
 import com.example.whatcanicook.R
 import com.example.whatcanicook.adapters.PagerAdapter
 import com.example.whatcanicook.data.database.entities.FavoritesEntity
+import com.example.whatcanicook.databinding.ActivityDetailsBinding
 import com.example.whatcanicook.ui.fragments.ingredients.IngredientsFragment
 import com.example.whatcanicook.ui.fragments.instructions.InstructionsFragment
 import com.example.whatcanicook.ui.fragments.overview.OverviewFragment
 import com.example.whatcanicook.viewmodels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
 
 @AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
 //I have to see why doaen't recognize me "Args"
+    private lateinit var binding: ActivityDetailsBinding
+
     private val args by navArgs<DetailsActivityArgs>()
     private val mainViewModel: MainViewModel by viewModels()
 
@@ -30,15 +34,19 @@ class DetailsActivity : AppCompatActivity() {
     private var recipeSaved = false
     private var savedRecipeId = 0
     /***********************************************************************/
+
+    private lateinit var menuItem: MenuItem
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
+        binding = ActivityDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 
-        setSupportActionBar(toolbar)
-        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+//        I add all 3 fragment to this activity
         val fragments = ArrayList<Fragment>()
         fragments.add(OverviewFragment())
         fragments.add(IngredientsFragment())
@@ -52,21 +60,24 @@ class DetailsActivity : AppCompatActivity() {
         val resultBundle = Bundle()
         resultBundle.putParcelable("recipeBundle", args.result)
 
-        val adapter = PagerAdapter(
+        val pagerAdapter = PagerAdapter(
             resultBundle,
             fragments,
-            titles,
-            supportFragmentManager
+            this
         )
-
-        viewPager.adapter = adapter
-        tabLayout.setupWithViewPager(viewPager)
+        binding.viewPager2.isUserInputEnabled = false
+        binding.viewPager2.apply {
+            adapter = pagerAdapter
+        }
+        TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
+            tab.text = titles[position]
+        }.attach()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
-        val menuItem = menu?.findItem(R.id.save_to_favorites_menu)
-        checkSavedRecipes(menuItem!!)
+        menuItem = menu!!.findItem(R.id.save_to_favorites_menu)
+        checkSavedRecipes(menuItem)
         return true
     }
 
@@ -125,7 +136,7 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun showSnackBar(message: String) {
         Snackbar.make(
-            detailsLayout,
+            binding.detailsLayout,
             message,
             Snackbar.LENGTH_SHORT
         ).setAction("Okay") {}
@@ -134,5 +145,9 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun changeMenuItemColor(item: MenuItem, color: Int) {
         item.icon?.setTint(ContextCompat.getColor(this, color))
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        changeMenuItemColor(menuItem, R.color.white)
     }
 }

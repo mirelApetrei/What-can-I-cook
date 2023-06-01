@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.whatcanicook.R
+import com.example.whatcanicook.databinding.IngredientsRowLayoutBinding
 import com.example.whatcanicook.models.ExtendedIngredient
 import com.example.whatcanicook.utils.Constants.Companion.BASE_IMAGE_URL
 import com.example.whatcanicook.utils.RecipesDiffUtil
@@ -16,25 +17,33 @@ class IngredientsAdapter: RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>(
 
     private var ingredientsList = emptyList<ExtendedIngredient>()
 
-    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
+    class MyViewHolder(val binding: IngredientsRowLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.ingredients_row_layout, parent, false))
+        return MyViewHolder(
+            IngredientsRowLayoutBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.itemView.ingredient_imageView.load(BASE_IMAGE_URL + ingredientsList[position].image) {
-
+        holder.binding.ingredientImageView.load(BASE_IMAGE_URL + ingredientsList[position].image) {
             crossfade(600)
-
-//            holder.itemView.animate().alpha(1f).setDuration(600).start() // <-- this method is instead of crossfade()
-            error(R.drawable.ic_error_placeholder)
+            kotlin.error(R.drawable.ic_error_placeholder)
         }
-        holder.itemView.ingredient_name.text = ingredientsList[position].name.capitalize(Locale.ROOT)
-        holder.itemView.ingredient_amount.text = ingredientsList[position].amount.toString()
-        holder.itemView.ingredient_unit.text = ingredientsList[position].unit
-        holder.itemView.ingredient_consistency.text = ingredientsList[position].consistency
-        holder.itemView.ingredient_original.text = ingredientsList[position].original
+        holder.binding.ingredientName.text = ingredientsList[position].name.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(
+                Locale.ROOT
+            ) else it.toString()
+        }
+        holder.binding.ingredientAmount.text = ingredientsList[position].amount.toString()
+        holder.binding.ingredientUnit.text = ingredientsList[position].unit
+        holder.binding.ingredientConsistency.text = ingredientsList[position].consistency
+        holder.binding.ingredientOriginal.text = ingredientsList[position].original
     }
 
     override fun getItemCount(): Int {

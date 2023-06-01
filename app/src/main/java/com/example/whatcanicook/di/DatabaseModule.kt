@@ -2,7 +2,7 @@ package com.example.whatcanicook.di
 
 
 import android.content.Context
-import androidx.room.Room.databaseBuilder
+import androidx.room.Room
 import com.example.whatcanicook.data.database.RecipesDatabase
 import com.example.whatcanicook.utils.Constants.Companion.DATABASE_NAME
 import dagger.Module
@@ -21,7 +21,7 @@ object DatabaseModule {
     @Provides
     fun provideDatabase(
         @ApplicationContext context: Context
-    ) = databaseBuilder(
+    ) = Room.databaseBuilder(
         context,
         RecipesDatabase::class.java,
         DATABASE_NAME

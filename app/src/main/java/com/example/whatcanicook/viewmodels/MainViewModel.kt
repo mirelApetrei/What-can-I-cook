@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import androidx.hilt.lifecycle.ViewModelInject
+import android.os.Parcelable
 import androidx.lifecycle.*
 import com.example.whatcanicook.data.database.entities.RecipesEntity
 import com.example.whatcanicook.data.Repository
@@ -15,12 +15,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
+import javax.inject.Inject
 
-class MainViewModel @ViewModelInject constructor(
+class MainViewModel @Inject constructor(
     private val repository: Repository,
     application: Application
 ) : AndroidViewModel(application) {
 
+    var recyclerViewState: Parcelable? = null
 
     /** ROOM DATABASE */
     /********************************************************************************************/
@@ -43,7 +45,7 @@ class MainViewModel @ViewModelInject constructor(
             repository.local.deleteFavoriteRecipe(favoritesEntity)
         }
 
-    private fun deleteAllFavoriteRecipes() =
+    fun deleteAllFavoriteRecipes() =
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.deleteAllFavoriteRecipes()
         }
@@ -101,6 +103,7 @@ class MainViewModel @ViewModelInject constructor(
         val recipesEntity = RecipesEntity(foodRecipe)
         insertRecipes(recipesEntity)
     }
+
     private fun handleFoodRecipesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe>? {
         when {
             response.message().toString().contains("timeout") -> {

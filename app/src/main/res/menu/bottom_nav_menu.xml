@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/menu_receipes"
-        android:icon="@drawable/menu_book"
-        android:title="Receipes" />
-    <item
-        android:id="@+id/menu_favorites"
-        android:icon="@drawable/favorites_icon"
-        android:title="Favorites" />
-    <item
-        android:id="@+id/menu_shoppingList"
-        android:icon="@drawable/shopping_list"
-        android:title="Shopping List" />
+    <item android:id="@+id/recipesFragment"
+        android:title="@string/recipes_fragment"
+        android:icon="@drawable/ic_menu_book"/>
 
+    <item android:id="@+id/favoriteRecipesFragment"
+        android:title="@string/favorite_recipes_fragment"
+        android:icon="@drawable/ic_star"/>
+
+    <item android:id="@+id/shoppingLists"
+        android:title="@string/shopping_list_fragment"
+        android:icon="@drawable/ic_shopping_cart"/>
 
 </menu>

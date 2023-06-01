@@ -12,6 +12,7 @@ import coil.load
 import com.example.whatcanicook.R
 import com.example.whatcanicook.models.Result
 import com.example.whatcanicook.ui.fragments.home.HomeFragment
+import com.example.whatcanicook.ui.fragments.home.HomeFragmentDirections
 import org.jsoup.Jsoup
 
 
@@ -20,7 +21,7 @@ class RecipesRowBinding {
     companion object {
 
 
-//        with this function I'm passing to "details activity, the information of the clicked recipe, so that can be shown in DetailActivity
+        //        with this function I'm passing to "details activity, the information of the clicked recipe, so that can be shown in DetailActivity
         @BindingAdapter("onRecipeClickListener")
         @JvmStatic
         fun onRecipeClickListener(recipeRowLayout: ConstraintLayout, result: Result) {
@@ -28,7 +29,7 @@ class RecipesRowBinding {
             recipeRowLayout.setOnClickListener {
                 try {
                     val action =
-                        HomeFragmentDirections.actionRecipesFragmentToDetailsActivity(result)
+                        HomeFragmentDirections.actionHomeFragmentToDetailsActivity(result)
                     recipeRowLayout.findNavController().navigate(action)
                 } catch (e: Exception) {
                     Log.d("onRecipeClickListener", e.toString())
@@ -45,23 +46,11 @@ class RecipesRowBinding {
             }
         }
 
-        @BindingAdapter("setNumberOfLikes")
-        @JvmStatic
-        fun setNumberOfLikes(textView: TextView, likes: Int){
-            textView.text = likes.toString()
-        }
-
-        @BindingAdapter("setNumberOfMinutes")
-        @JvmStatic
-        fun setNumberOfMinutes(textView: TextView, minutes: Int){
-            textView.text = minutes.toString()
-        }
-
         @BindingAdapter("applyVeganColor")
         @JvmStatic
         fun applyVeganColor(view: View, vegan: Boolean) {
-            if(vegan){
-                when(view){
+            if (vegan) {
+                when (view) {
                     is TextView -> {
                         view.setTextColor(
                             ContextCompat.getColor(
@@ -70,6 +59,7 @@ class RecipesRowBinding {
                             )
                         )
                     }
+
                     is ImageView -> {
                         view.setColorFilter(
                             ContextCompat.getColor(
@@ -84,8 +74,8 @@ class RecipesRowBinding {
 
         @BindingAdapter("parseHtml")
         @JvmStatic
-        fun parseHtml(textView: TextView, description: String?){
-            if(description != null) {
+        fun parseHtml(textView: TextView, description: String?) {
+            if (description != null) {
                 val desc = Jsoup.parse(description).text()
                 textView.text = desc
             }
