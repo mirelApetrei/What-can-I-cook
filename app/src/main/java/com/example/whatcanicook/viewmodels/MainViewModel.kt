@@ -11,12 +11,14 @@ import com.example.whatcanicook.data.Repository
 import com.example.whatcanicook.data.database.entities.FavoritesEntity
 import com.example.whatcanicook.models.FoodRecipe
 import com.example.whatcanicook.utils.NetworkResult
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModel @Inject constructor(
     private val repository: Repository,
     application: Application

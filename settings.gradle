@@ -1,4 +1,4 @@
-pluginManagement {
+/*pluginManagement {
     repositories {
         google()
         mavenCentral()
@@ -12,6 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url 'https://jitpack.io' }
     }
-}
-rootProject.name = "What Can I Cook"
+}*/
 include ':app'
+rootProject.name = "What Can I Cook"

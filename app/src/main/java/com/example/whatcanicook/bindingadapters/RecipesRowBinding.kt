@@ -11,9 +11,9 @@ import androidx.navigation.findNavController
 import coil.load
 import com.example.whatcanicook.R
 import com.example.whatcanicook.models.Result
-import com.example.whatcanicook.ui.fragments.home.HomeFragment
 import com.example.whatcanicook.ui.fragments.home.HomeFragmentDirections
 import org.jsoup.Jsoup
+import java.lang.Exception
 
 
 class RecipesRowBinding {
@@ -46,6 +46,21 @@ class RecipesRowBinding {
             }
         }
 
+
+//        I'm using String.valueOf(), inside the XML files to update and display the 2 values
+
+      /*  @BindingAdapter("setNumberOfLikes")
+        @JvmStatic
+        fun setNumberOfLikes(textView: TextView, likes: Int) {
+            textView.text = likes.toString()
+        }
+
+        @BindingAdapter("setNumberOfMinutes")
+        @JvmStatic
+        fun setNumberOfMinutes(textView: TextView, minutes: Int) {
+            textView.text = minutes.toString()
+        }
+*/
         @BindingAdapter("applyVeganColor")
         @JvmStatic
         fun applyVeganColor(view: View, vegan: Boolean) {

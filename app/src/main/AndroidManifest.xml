@@ -17,7 +17,6 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.DetailsActivity"
-            android:exported="false"
             android:label="Details"
             android:screenOrientation="portrait"
             android:theme="@style/DetailsActivityStyle"/>

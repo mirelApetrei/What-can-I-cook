@@ -1,7 +1,7 @@
 package com.example.whatcanicook.di
 
 
-import android.app.Application
+
 import com.example.whatcanicook.utils.Constants.Companion.BASE_URL
 import com.example.whatcanicook.data.network.FoodRecipesApi
 import dagger.Module

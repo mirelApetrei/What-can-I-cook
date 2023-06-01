@@ -92,8 +92,8 @@ class FavoriteRecipesAdapter(
                 applySelection(holder, currentRecipe)
                 true
             } else {
-                multiSelection = false
-                false
+                applySelection(holder, currentRecipe)
+                true
             }
 
         }
@@ -110,6 +110,7 @@ class FavoriteRecipesAdapter(
             changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.strokeColor)
         }
     }
+
     private fun applySelection(holder: MyViewHolder, currentRecipe: FavoritesEntity) {
         if (selectedRecipes.contains(currentRecipe)) {
             selectedRecipes.remove(currentRecipe)

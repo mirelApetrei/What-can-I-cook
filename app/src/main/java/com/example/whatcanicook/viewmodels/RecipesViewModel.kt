@@ -18,10 +18,12 @@ import com.example.whatcanicook.utils.Constants.Companion.QUERY_FILL_INGREDIENTS
 import com.example.whatcanicook.utils.Constants.Companion.QUERY_NUMBER
 import com.example.whatcanicook.utils.Constants.Companion.QUERY_SEARCH
 import com.example.whatcanicook.utils.Constants.Companion.QUERY_TYPE
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class RecipesViewModel @Inject constructor(
     application: Application, private val dataStoreRepository: DataStoreRepository
 ) : AndroidViewModel(application) {

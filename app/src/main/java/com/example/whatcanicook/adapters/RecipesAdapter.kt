@@ -12,7 +12,7 @@ import com.example.whatcanicook.utils.RecipesDiffUtil
 
 class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
 
-    private var recipes = emptyList<com.example.whatcanicook.models.Result>()
+    private var recipes = emptyList<Result>()
 
     class MyViewHolder(private val binding: RecipeLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
