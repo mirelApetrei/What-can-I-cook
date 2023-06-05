@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.homeFragment,
                 R.id.favoriteRecipesFragment,
-                R.id.shop_list_fragment
+                R.id.shopListFragment
             )
         )
         binding.bottomNavigationView.setupWithNavController(navController)
