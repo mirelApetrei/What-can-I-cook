@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EA</color>
-    <color name="colorPrimaryDark">#5502C8</color>
-    <color name="colorAccent">#9D46FF</color>
+    <color name="colorPrimary">#B6F76B14</color>
+    <color name="colorPrimaryDark">#9F4107</color>
+    <color name="colorAccent">#E38F2F</color>
 
     <color name="white">#FFFFFF</color>
-    <color name="lightGray">#F9F9F9</color>
+    <color name="customGray">#F9F9F9</color>
     <color name="mediumGray">#D1D1D1</color>
     <color name="lightMediumGray">#80D1D1D1</color>
     <color name="darkGray">#4B4B4B</color>
@@ -25,8 +25,8 @@
     // Custom Chip Style
     <color name="checkedChipBackgroundColor">@color/dark</color>
     <color name="chipBackgroundColor">@color/darker</color>
-    <color name="checkedChipTextColor">@color/lightGray</color>
-    <color name="chipTextColor">@color/lightGray</color>
+    <color name="checkedChipTextColor">@color/customGray</color>
+    <color name="chipTextColor">@color/customGray</color>
 
     // Custom CardView Style
     <color name="strokeColor">@color/mediumGray</color>
