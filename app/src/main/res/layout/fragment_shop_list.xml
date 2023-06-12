@@ -36,7 +36,7 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Work in Progress"
+                    android:text="Work in progress"
                     android:textColor="@color/bottomNavCheckedItemColor"
                     android:textStyle="bold"
                     android:textSize="32sp"

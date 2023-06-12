@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EA</color>
-    <color name="colorPrimaryDark">#5502C8</color>
-    <color name="colorAccent">#9D46FF</color>
+    <color name="colorPrimary">#F89C6B</color>
+    <color name="colorPrimaryDark">#AC3E03</color>
+    <color name="colorAccent">#CA6D3B</color>
 
     <color name="white">#FFFFFF</color>
     <color name="lightGray">#F9F9F9</color>
@@ -18,19 +18,19 @@
 
     <!-- LIGHT THEME -->
 
-    <color name="backgroundColor">@color/lightGray</color>
+    <color name="backgroundColor">#F3CBF6F2</color>
     <color name="placeholderColor">@color/mediumGray</color>
     <color name="itemColor">@color/darker</color>
 
     // Custom Chip Style
-    <color name="checkedChipBackgroundColor">#206200EA</color>
-    <color name="chipBackgroundColor">@color/lightGray</color>
+    <color name="checkedChipBackgroundColor">#0A8074</color>
+    <color name="chipBackgroundColor">#B3EFB1</color>
     <color name="checkedChipTextColor">@color/colorPrimary</color>
     <color name="chipTextColor">@color/darkGray</color>
 
     // Custom CardView Style
-    <color name="strokeColor">@color/lightMediumGray</color>
-    <color name="cardBackgroundColor">@color/white</color>
+    <color name="strokeColor">#6D3737</color>
+    <color name="cardBackgroundColor">#FFF2DF</color>
     <color name="cardBackgroundLightColor">#106200EA</color>
     <color name="titleColor">@color/darker</color>
     <color name="descriptionColor">@color/darkGray</color>
@@ -41,8 +41,8 @@
     <color name="actionBarBackgroundColor">@color/colorPrimary</color>
 
     // Custom BottomNavigationView Style
-    <color name="bottomNavBackground">@color/white</color>
-    <color name="bottomNavItemColor">@color/darkGray</color>
-    <color name="bottomNavCheckedItemColor">@color/colorPrimary</color>
+    <color name="bottomNavBackground">@color/colorAccent</color>
+    <color name="bottomNavItemColor">@color/white</color>
+    <color name="bottomNavCheckedItemColor">@color/green</color>
 
 </resources>
