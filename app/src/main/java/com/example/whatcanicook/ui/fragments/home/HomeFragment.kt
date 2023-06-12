@@ -33,7 +33,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
-@ExperimentalCoroutinesApi
+
 @AndroidEntryPoint
 class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 

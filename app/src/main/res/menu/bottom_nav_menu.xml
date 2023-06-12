@@ -13,4 +13,7 @@
         android:title="@string/shopping_list_fragment"
         android:icon="@drawable/add_shopping_cart"/>
 
+    <item android:id="@+id/possibilitiesFragment"
+        android:title="@string/what_can_i_cook"
+        android:icon="@drawable/ic_restaurant"/>
 </menu>

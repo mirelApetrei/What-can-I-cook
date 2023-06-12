@@ -18,7 +18,7 @@
 
     <!-- LIGHT THEME -->
 
-    <color name="backgroundColor">#F3CBF6F2</color>
+    <color name="backgroundColor">#F3FAFAFA</color>
     <color name="placeholderColor">@color/mediumGray</color>
     <color name="itemColor">@color/darker</color>
 

@@ -54,4 +54,8 @@
         android:id="@+id/shopListFragment"
         android:name="com.example.whatcanicook.ui.fragments.shopList.ShopListFragment"
         android:label="ShopListFragment" />
+    <fragment
+        android:id="@+id/possibilitiesFragment"
+        android:name="com.example.whatcanicook.ui.fragments.possibilities.PossibilitiesFragment"
+        android:label="PossibilitiesFragment" />
 </navigation>
