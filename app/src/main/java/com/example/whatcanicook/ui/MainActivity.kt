@@ -1,5 +1,6 @@
 package com.example.whatcanicook.ui
-qeimport androidx.appcompat.app.AppCompatActivity
+
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -9,7 +10,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.whatcanicook.R
 import com.example.whatcanicook.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -17,10 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var navController: NavController
-//    private lateinit var bottomNavigation: MeowBottomNavigation
 
-
-    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme)
