@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 }
 
 
-
+//some thing
 
 /*in the onCreate()
 *
