@@ -21,14 +21,16 @@
             android:id="@+id/row_cardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="10dp"
+            android:elevation="10dp"
+            app:cardPreventCornerOverlap="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="@color/strokeColor"
-            app:strokeWidth="2dp">
+            app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

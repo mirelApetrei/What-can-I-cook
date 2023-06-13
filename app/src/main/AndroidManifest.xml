@@ -7,6 +7,7 @@
 
     <application
         android:name=".MyApplication"
+        android:enableOnBackInvokedCallback="true"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,15 +15,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/SplashScreenStyle"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="tiramisu">
         <activity
             android:name=".ui.DetailsActivity"
             android:label="Details"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/DetailsActivityStyle"/>
         <activity
             android:name=".ui.MainActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="true"
             >
             <intent-filter>
@@ -38,3 +40,7 @@
     </application>
 
 </manifest>
+
+
+<!--android:enableOnBackInvokedCallback="true"
+     tools:targetApi="tiramisu" => are for meow navbar-->

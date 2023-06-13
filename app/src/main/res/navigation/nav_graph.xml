@@ -7,67 +7,55 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.whatcanicook.ui.recipes.HomeFragment"
-        android:label="fragment_home"
+        android:name="com.example.whatcanicook.ui.fragments.home.HomeFragment"
+        android:label="Home Page"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_favoritesFragment"
-            app:destination="@id/favoritesFragment" />
+            android:id="@+id/action_homeFragment_to_recipesBottomSheet"
+            app:destination="@id/recipesBottomSheet" />
+        <argument
+            android:name="backFromBottomSheet"
+            app:argType="boolean"
+            android:defaultValue="false" />
         <action
-            android:id="@+id/action_homeFragment_to_recipeDetailFragment"
-            app:destination="@id/recipeDetailFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_shoppingListsFragment"
-            app:destination="@id/shoppingListsFragment" />
+            android:id="@+id/action_homeFragment_to_detailsActivity"
+            app:destination="@id/detailsActivity" />
     </fragment>
     <fragment
-        android:id="@+id/register_LoginFragment"
-        android:name="com.example.whatcanicook.ui.Register_LoginFragment"
-        android:label="Register_LoginFragment" >
+        android:id="@+id/favoriteRecipesFragment"
+        android:name="com.example.whatcanicook.ui.fragments.favorites.FavoritesRecipesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorite_recipes" >
         <action
-            android:id="@+id/action_register_LoginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_favoriteRecipesFragment_to_detailsActivity"
+            app:destination="@id/detailsActivity" />
     </fragment>
+    <dialog
+        android:id="@+id/recipesBottomSheet"
+        android:name="com.example.whatcanicook.ui.fragments.home.bottomsheet.RecipesBottomSheet"
+        android:label="recipes_bottom_sheet"
+        tools:layout="@layout/recipes_bottom_sheet" >
+        <action
+            android:id="@+id/action_recipesBottomSheet_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
+    <activity
+        android:id="@+id/detailsActivity"
+        android:name="com.example.whatcanicook.ui.DetailsActivity"
+        android:label="Details"
+        tools:layout="@layout/activity_details">
+        <argument
+            android:name="result"
+            app:argType="com.example.whatcanicook.models.Result" />
+    </activity>
     <fragment
-        android:id="@+id/favoritesFragment"
-        android:name="com.example.whatcanicook.ui.favorites.FavoritesFragment"
-        android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" >
-        <action
-            android:id="@+id/action_favoritesFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        android:id="@+id/shopListFragment"
+        android:name="com.example.whatcanicook.ui.fragments.shopList.ShopListFragment"
+        android:label="ShopListFragment" />
     <fragment
-        android:id="@+id/recipeDetailFragment"
-        android:name="com.example.whatcanicook.ui.RecipeDetailFragment"
-        android:label="fragment_recipe_detail"
-        tools:layout="@layout/fragment_recipe_detail" >
-        <action
-            android:id="@+id/action_recipeDetailFragment_to_ingredientsFragment"
-            app:destination="@id/ingredientsFragment" />
-        <action
-            android:id="@+id/action_recipeDetailFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/ingredientsFragment"
-        android:name="com.example.whatcanicook.ui.IngredientsFragment"
-        android:label="fragment_ingredients"
-        tools:layout="@layout/fragment_ingredients" >
-        <action
-            android:id="@+id/action_ingredientsFragment_to_shoppingListsFragment"
-            app:destination="@id/shoppingListsFragment" />
-        <action
-            android:id="@+id/action_ingredientsFragment_to_recipeDetailFragment"
-            app:destination="@id/recipeDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/shoppingListsFragment"
-        android:name="com.example.whatcanicook.ui.shopping.ShoppingListsFragment"
-        android:label="fragment_shopping_lists"
-        tools:layout="@layout/fragment_shopping_lists" >
-        <action
-            android:id="@+id/action_shoppingListsFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        android:id="@+id/possibilitiesFragment"
+        android:name="com.example.whatcanicook.ui.fragments.possibilities.PossibilitiesFragment"
+        android:label="PossibilitiesFragment" />
 </navigation>
