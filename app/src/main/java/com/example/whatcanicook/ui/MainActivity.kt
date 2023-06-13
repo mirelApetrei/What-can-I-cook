@@ -11,6 +11,7 @@ import com.example.whatcanicook.R
 import com.example.whatcanicook.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+//etwas
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
