@@ -29,7 +29,7 @@
     <color name="chipTextColor">@color/darkGray</color>
 
     // Custom CardView Style
-    <color name="strokeColor">#6D3737</color>
+    <color name="strokeColor">#FF5722</color>
     <color name="cardBackgroundColor">#FFF2DF</color>
     <color name="cardBackgroundLightColor">#106200EA</color>
     <color name="titleColor">@color/darker</color>

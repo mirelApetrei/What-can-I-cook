@@ -45,10 +45,6 @@
                 android:background="@color/colorAccent"
                 app:menu="@menu/bottom_nav_menu"/>
 
-
-
-
-
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
